@@ -9,6 +9,13 @@
   -webkit-line-clamp: var(--read-more-line-clamp, 2);
 }
 
+.list-group-item {
+  margin-bottom: 0 !important;
+}
+
+.list-group-item label {
+  margin-bottom: 0 !important;
+}
 
 /* Page: 'Backend post index'
    ------------------------------------------------------------------------- */

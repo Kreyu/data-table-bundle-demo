@@ -16,7 +16,7 @@
 
 {% block action_personalize %}
     <div class="ml-1">
-        {% with { attr: { 'data-toggle': 'collapse', 'data-target': '#' ~ personalization_form.vars.id ~ '__collapse' } } %}
+        {% with { attr: { 'data-toggle': 'modal', 'data-target': '#' ~ personalization_form.vars.id ~ '__modal' } } %}
             {{ parent() }}
         {% endwith %}
     </div>
@@ -92,6 +92,35 @@
                 </div>
             </div>
         </div>
+    </div>
+{% endblock %}
+
+{% block personalization_modal %}
+    <div class="modal modal-blur fade" id="{{ personalization_form.vars.id ~ '__modal' }}" tabindex="-1" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        {{ 'Personalization'|trans({}, 'KreyuDataTable') }}
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ data_table_personalization_form(personalization_form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block personalization_form_help %}
+    <div class="alert text-black-50 d-flex align-items-center">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M12 8l.01 0" /><path d="M11 12l1 0l0 4l1 0" /></svg>
+        </div>
+        <span class="ml-3">{{ 'Drag items between columns to show/hide relevant data in the list or change their order'|trans({}, 'KreyuDataTable') }}</span>
     </div>
 {% endblock %}
 

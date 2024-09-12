@@ -21,3 +21,9 @@
         </a>
     </div>
 {% endblock %}
+
+{# This block is rendered for columns with "block_prefix" option set to "post_author" #}
+{% block column_post_author_value %}
+    <span>{{ value.fullName }}</span>
+    <span class="small text-muted">{{ value.username }}</span>
+{% endblock %}

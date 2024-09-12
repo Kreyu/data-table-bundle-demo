@@ -12,6 +12,7 @@ use App\Entity\User;
 use App\Repository\PostRepository;
 use Kreyu\Bundle\DataTableBundle\Action\Type\ButtonActionType;
 use Kreyu\Bundle\DataTableBundle\Action\Type\FormActionType;
+use Kreyu\Bundle\DataTableBundle\Bridge\Doctrine\Orm\Filter\Type\DateRangeFilterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\Doctrine\Orm\Filter\Type\EntityFilterType;
 use Kreyu\Bundle\DataTableBundle\Bridge\Doctrine\Orm\Filter\Type\StringFilterType;
 use Kreyu\Bundle\DataTableBundle\Column\Type\CollectionColumnType;
@@ -52,15 +53,20 @@ class PostDataTableType extends AbstractDataTableType
                 /** This option is available thanks to the {@link TruncateTextColumnTypeExtension}. */
                 'truncate' => true,
                 'sort' => true,
+                'formatter' => function (string $title): string {
+                    return trim($title);
+                },
                 'value_attr' => [
                     'style' => 'max-width: 20rem;'
                 ],
             ])
             ->addColumn('author', LinkColumnType::class, [
                 'label' => 'label.author',
-                'formatter' => function (User $author): string {
-                    return sprintf('%s (%s)', $author->getFullName(), $author->getUsername());
-                },
+                /**
+                 * Custom block prefix can be applied and then used in the custom Twig theme.
+                 * In this case, value of this column will be rendered as the "column_post_author_value" block.
+                 */
+                'block_prefix' => 'post_author',
                 /**
                  * Just for example, we're displaying the author as link.
                  * This link will redirect to the same page, but with author filter applied with selected author.
@@ -192,6 +198,9 @@ class PostDataTableType extends AbstractDataTableType
                 'form_options' => [
                     'class' => Tag::class,
                 ],
+            ])
+            ->addFilter('publishedAt', DateRangeFilterType::class, [
+                'label' => 'label.published_at',
             ])
         ;
 

@@ -58,8 +58,17 @@ final class BlogController extends AbstractController
 
     /**
      * Lists all Post entities.
+     *
+     * This controller responds to two different routes with the same URL:
+     *   * 'admin_post_index' is the route with a name that follows the same
+     *     structure as the rest of the controllers of this class.
+     *   * 'admin_index' is a nice shortcut to the backend homepage. This allows
+     *     to create simpler links in the templates. Moreover, in the future we
+     *     could move this annotation to any other controller while maintaining
+     *     the route name and therefore, without breaking any existing link.
      */
-    #[Route('/', name: 'admin_post_index', methods: ['GET'])]
+    #[Route('/', name: 'admin_index', methods: ['GET', 'POST'])]
+    #[Route('/', name: 'admin_post_index', methods: ['GET', 'POST'])]
     public function index(
         Request $request,
         #[CurrentUser] User $user,
@@ -67,6 +76,10 @@ final class BlogController extends AbstractController
     ): Response {
         $authorPosts = $this->createDataTable(PostDataTableType::class, $posts->createByAuthorQueryBuilder($user));
         $authorPosts->handleRequest($request);
+
+        if ($authorPosts->isExporting()) {
+            return $this->file($authorPosts->export());
+        }
 
         return $this->render('admin/blog/index.html.twig', [
             // Important: call the 'createView' method and pass the DataTableView to Twig

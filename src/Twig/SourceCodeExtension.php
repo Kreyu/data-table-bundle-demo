@@ -53,7 +53,6 @@ final class SourceCodeExtension extends AbstractExtension
         return [
             new TwigFunction('link_source_file', $this->linkSourceFile(...), ['is_safe' => ['html'], 'needs_environment' => true]),
             new TwigFunction('show_source_code', $this->showSourceCode(...), ['is_safe' => ['html'], 'needs_environment' => true]),
-            new TwigFunction('show_source_code_modal', $this->showSourceCodeModal(...), ['is_safe' => ['html'], 'needs_environment' => true]),
         ];
     }
 
