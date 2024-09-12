@@ -84,16 +84,6 @@ final class SourceCodeExtension extends AbstractExtension
         return $twig->render('debug/source_code.html.twig', [
             'controller' => $this->getController(),
             'template' => $this->getTemplateSource($twig->resolveTemplate($template)),
-            'template_raw' => $template,
-        ]);
-    }
-
-    public function showSourceCodeModal(Environment $twig, string|TemplateWrapper $template, string $id = 'sourceCodeModal'): string
-    {
-        return $twig->render('debug/source_code_modal.html.twig', [
-            'controller' => $this->getController(),
-            'template' => $this->getTemplateSource($twig->resolveTemplate($template)),
-            'id' => $id,
         ]);
     }
 
