@@ -13,8 +13,10 @@ namespace App\Repository;
 
 use App\Entity\Post;
 use App\Entity\Tag;
+use App\Entity\User;
 use App\Pagination\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use function Symfony\Component\String\u;
 
@@ -87,6 +89,19 @@ class PostRepository extends ServiceEntityRepository
         ;
 
         return $result;
+    }
+
+    public function createByAuthorQueryBuilder(User $author): QueryBuilder
+    {
+        return $this->createQueryBuilder('p')
+            ->addSelect('a', 't', 'CONCAT(a.fullName, a.username) AS HIDDEN authorFullNameWithUsername')
+            ->leftJoin('p.author', 'a')
+            ->leftJoin('p.tags', 't')
+            // We're adding a second join to use it exclusively with tags filter.
+            ->leftJoin('p.tags', 't2')
+            ->where('p.author = :author')
+            ->setParameter('author', $author)
+        ;
     }
 
     /**

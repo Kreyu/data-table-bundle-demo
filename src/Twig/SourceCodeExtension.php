@@ -53,6 +53,7 @@ final class SourceCodeExtension extends AbstractExtension
         return [
             new TwigFunction('link_source_file', $this->linkSourceFile(...), ['is_safe' => ['html'], 'needs_environment' => true]),
             new TwigFunction('show_source_code', $this->showSourceCode(...), ['is_safe' => ['html'], 'needs_environment' => true]),
+            new TwigFunction('show_source_code_modal', $this->showSourceCodeModal(...), ['is_safe' => ['html'], 'needs_environment' => true]),
         ];
     }
 
@@ -83,6 +84,16 @@ final class SourceCodeExtension extends AbstractExtension
         return $twig->render('debug/source_code.html.twig', [
             'controller' => $this->getController(),
             'template' => $this->getTemplateSource($twig->resolveTemplate($template)),
+            'template_raw' => $template,
+        ]);
+    }
+
+    public function showSourceCodeModal(Environment $twig, string|TemplateWrapper $template, string $id = 'sourceCodeModal'): string
+    {
+        return $twig->render('debug/source_code_modal.html.twig', [
+            'controller' => $this->getController(),
+            'template' => $this->getTemplateSource($twig->resolveTemplate($template)),
+            'id' => $id,
         ]);
     }
 

@@ -1,0 +1,23 @@
+{% extends 'data_table/bootstrap_4.html.twig' %}
+
+{% block column_text_truncate_value %}
+    {# This HTML is used if TextColumnType is used with 'truncate' option is set #}
+    {# @see App\DataTable\Column\Extension\TruncateTextColumnTypeExtension #}
+
+    {# Requires "read-more" Stimulus component and "stimulus-use" #}
+    {# https://www.stimulus-components.com/docs/stimulus-read-more #}
+    {# https://github.com/stimulus-use/stimulus-use #}
+
+    {# The "read-more" controller is extended in the "assets/controllers/read-more-controller.js" #}
+    {# The "text-ellipsis" class is custom, added in the assets/styles/admin.css #}
+
+    <div {{ stimulus_controller('read-more', { moreText: 'action.read_more'|trans, lessText: 'action.read_less'|trans }) }} {{- block('attributes') -}}>
+        {% with { attr: { class: 'text-ellipsis' }|merge(stimulus_target('read-more', 'content')) } %}
+            {{ block('column_text_value') }}
+        {% endwith %}
+
+        <a class="d-none link-underline-primary" role="button" {{ stimulus_action('read-more', 'toggle') }} {{ stimulus_target('read-more', 'button') }}>
+            {{ 'action.read_more'|trans }}
+        </a>
+    </div>
+{% endblock %}

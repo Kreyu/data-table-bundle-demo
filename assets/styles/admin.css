@@ -2,6 +2,14 @@
   --blue: #007bff;
 }
 
+.text-ellipsis {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--read-more-line-clamp, 2);
+}
+
+
 /* Page: 'Backend post index'
    ------------------------------------------------------------------------- */
 body#admin_post_index .item-actions {

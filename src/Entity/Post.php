@@ -133,6 +133,11 @@ class Post
         $this->publishedAt = $publishedAt;
     }
 
+    public function isScheduled(): bool
+    {
+        return $this->publishedAt > new \DateTimeImmutable();
+    }
+
     public function getAuthor(): ?User
     {
         return $this->author;

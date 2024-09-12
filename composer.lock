@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ce8b35c705df9d14e9c3fa3324d861d5",
+    "content-hash": "0c935a5061b02cf3954632581c6281e1",
     "packages": [
         {
             "name": "composer/semver",
@@ -1446,6 +1446,72 @@
                 }
             ],
             "time": "2023-10-06T06:47:41+00:00"
+        },
+        {
+            "name": "kreyu/data-table-bundle",
+            "version": "v0.21.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Kreyu/data-table-bundle.git",
+                "reference": "ac7809e30db774cac9cd8ed88116f0c86aa308d7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Kreyu/data-table-bundle/zipball/ac7809e30db774cac9cd8ed88116f0c86aa308d7",
+                "reference": "ac7809e30db774cac9cd8ed88116f0c86aa308d7",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1",
+                "symfony/form": "^6.0|^7.0",
+                "symfony/framework-bundle": "^6.0|^7.0",
+                "symfony/mime": "^6.0|^7.0",
+                "symfony/translation": "^6.0|^7.0",
+                "symfony/twig-bundle": "^6.0|^7.0",
+                "symfony/validator": "^6.0|^7.0",
+                "twig/extra-bundle": "^3.6",
+                "twig/intl-extra": "^3.6"
+            },
+            "require-dev": {
+                "dg/bypass-finals": "dev-master",
+                "doctrine/doctrine-bundle": "^2.9",
+                "doctrine/orm": "^2.15",
+                "friendsofphp/php-cs-fixer": "^3.49",
+                "kubawerlos/php-cs-fixer-custom-fixers": "^3.11",
+                "openspout/openspout": "^4.23",
+                "phpoffice/phpspreadsheet": "^1.28",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^10.4",
+                "roave/security-advisories": "dev-latest",
+                "symfony/http-foundation": "^6.0|^7.0",
+                "symfony/maker-bundle": "^1.48",
+                "symfony/security-core": "^6.2|^7.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Kreyu\\Bundle\\DataTableBundle\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Wróblewski",
+                    "email": "kontakt@swroblewski.pl"
+                }
+            ],
+            "description": "Streamlines creation process of the data tables",
+            "keywords": [
+                "symfony-ux"
+            ],
+            "support": {
+                "issues": "https://github.com/Kreyu/data-table-bundle/issues",
+                "source": "https://github.com/Kreyu/data-table-bundle/tree/v0.21.4"
+            },
+            "time": "2024-09-12T07:46:30+00:00"
         },
         {
             "name": "league/commonmark",

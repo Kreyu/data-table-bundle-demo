@@ -173,6 +173,10 @@
                 <source>label.published_at</source>
                 <target>Opublikowano</target>
             </trans-unit>
+            <trans-unit id="label.tags">
+                <source>label.tags</source>
+                <target>Tagi</target>
+            </trans-unit>
             <trans-unit id="label.actions">
                 <source>label.actions</source>
                 <target>Akcje</target>
@@ -184,6 +188,10 @@
             <trans-unit id="action.edit_contents">
                 <source>action.edit_contents</source>
                 <target>Edycja treści</target>
+            </trans-unit>
+            <trans-unit id="action.show_post">
+                <source>action.show_post</source>
+                <target>Pokaż post</target>
             </trans-unit>
 
             <trans-unit id="menu.toggle_nav">
@@ -205,6 +213,22 @@
             <trans-unit id="menu.admin">
                 <source>menu.admin</source>
                 <target>Panel administracyjny</target>
+            </trans-unit>
+            <trans-unit id="menu.search">
+                <source>menu.search</source>
+                <target>Szukaj</target>
+            </trans-unit>
+            <trans-unit id="menu.choose_language">
+                <source>menu.choose_language</source>
+                <target>Wybierz język</target>
+            </trans-unit>
+            <trans-unit id="menu.user">
+                <source>menu.user</source>
+                <target>Konto</target>
+            </trans-unit>
+            <trans-unit id="menu.rss">
+                <source>menu.rss</source>
+                <target>Posty RSS</target>
             </trans-unit>
             <trans-unit id="menu.logout">
                 <source>menu.logout</source>
@@ -258,6 +282,18 @@
             <trans-unit id="help.browse_admin">
                 <source>help.browse_admin</source>
                 <target><![CDATA[Przeglądaj <strong>panel administracyjny</strong> aplikacji demonstracyjnej.]]></target>
+            </trans-unit>
+            <trans-unit id="help.post_summary">
+                <source>help.post_summary</source>
+                <target>Podsumowanie nie może zawierać Markdown ani HTML; wyłącznie czysty tekst.</target>
+            </trans-unit>
+            <trans-unit id="help.post_content">
+                <source>help.post_content</source>
+                <target>Dozwolony Markdown oraz HTML.</target>
+            </trans-unit>
+            <trans-unit id="help.post_publication">
+                <source>help.post_publication</source>
+                <target>Ustaw datę w przyszłości aby zaplanować publikację posta.</target>
             </trans-unit>
             <trans-unit id="help.login_users">
                 <source>help.login_users</source>

@@ -1,0 +1,6 @@
+kreyu_data_table:
+  defaults:
+    themes:
+      - 'data_table/theme.html.twig'
+    personalization:
+      enabled: true

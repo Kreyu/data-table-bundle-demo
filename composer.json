@@ -1,8 +1,8 @@
 {
-    "name": "symfony/symfony-demo",
+    "name": "kreyu/data-table-bundle-demo",
     "license": "MIT",
     "type": "project",
-    "description": "Symfony Demo Application",
+    "description": "DataTableBundle Demo Application",
     "minimum-stability": "stable",
     "prefer-stable": true,
     "replace": {
@@ -20,6 +20,7 @@
         "doctrine/doctrine-bundle": "^2.11",
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^3.0",
+        "kreyu/data-table-bundle": "0.21.*",
         "league/commonmark": "^2.1",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "7.1.*",

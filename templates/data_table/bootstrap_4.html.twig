@@ -1,0 +1,108 @@
+{% extends '@KreyuDataTable/themes/bootstrap_5.html.twig' %}
+
+{% block kreyu_data_table_filters_form %}
+    {% with { form_themes: [_self, 'bootstrap_4_layout.html.twig'] } %}
+        {{ block('kreyu_data_table_filters_form', '@KreyuDataTable/themes/base.html.twig') }}
+    {% endwith %}
+{% endblock %}
+
+{% block action_filter %}
+    <div class="ml-1">
+        {% with { attr: { 'data-toggle': 'collapse', 'data-target': '#' ~ filtration_form.vars.id ~ '__collapse' } } %}
+            {{ parent() }}
+        {% endwith %}
+    </div>
+{% endblock %}
+
+{% block action_personalize %}
+    <div class="ml-1">
+        {% with { attr: { 'data-toggle': 'collapse', 'data-target': '#' ~ personalization_form.vars.id ~ '__collapse' } } %}
+            {{ parent() }}
+        {% endwith %}
+    </div>
+{% endblock %}
+
+{% block action_form_value %}
+    {% set attr = { class: 'd-inline-block' }|merge(attr) %}
+
+    {% set button_attr = {
+        class: 'btn btn-primary' ~ (icon_attr and label is same as false ? ' btn-icon' : '')
+    }|merge(button_attr) %}
+
+    {% if confirmation %}
+        {% with {
+            button_tag: 'a',
+            button_attr: {
+                'type': 'button',
+                'data-toggle': 'modal',
+                'data-target': '#' ~ confirmation.identifier,
+            }|merge(button_attr),
+            confirmation: false,
+        } %}
+            {{ parent() }}
+        {% endwith %}
+
+        {% with { confirm_button_tag: 'button', confirm_button_attr: { type: 'submit', form: form_id } } %}
+            {{ block('action_confirmation_modal') }}
+        {% endwith %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block action_confirmation_modal %}
+    {% set modal_status_color_class = {
+        'info': 'primary',
+        'warning': 'warning',
+        'danger': 'danger',
+    }[confirmation.type] %}
+
+    <div class="modal modal-blur fade" id="{{ confirmation.identifier }}" tabindex="-1" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-status bg-{{ modal_status_color_class }}"></div>
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        {{ confirmation.label_title|trans({}, confirmation.translation_domain) }}
+                    </h5>
+                </div>
+                <div class="modal-body py-4">
+                    {{ confirmation.label_description|trans({}, confirmation.translation_domain) }}
+                </div>
+                <div class="modal-footer">
+                    <div class="w-100">
+                        <div class="row">
+                            <div class="col">
+                                <a href="#" class="btn w-100" data-dismiss="modal">
+                                    {{ confirmation.label_cancel|trans({}, confirmation.translation_domain) }}
+                                </a>
+                            </div>
+                            <div class="col">
+                                {% set confirm_button_tag = confirm_button_tag|default('a') %}
+                                {% set confirm_button_attr = {
+                                    class: 'w-100 btn btn-' ~ modal_status_color_class
+                                }|merge(confirm_button_attr|default({})) %}
+
+                                <{{ confirm_button_tag }} {% with { attr: confirm_button_attr } %}{{ block('attributes') }}{% endwith %}>
+                                    {{ confirmation.label_confirm|trans({}, confirmation.translation_domain) }}
+                                </{{ confirm_button_tag }}>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block kreyu_data_table_value_row %}
+    {# Because the demo application is using Bootstrap 4 #}
+    {# which does not support "align-middle" class used on the whole table #}
+    {# we're adding the "align-middle" class to every <td> to make it vertically center #}
+
+    {% for column_value in row %}
+        <td class="align-middle">
+            {{- data_table_column_value(column_value) -}}
+        </td>
+    {% endfor %}
+{% endblock %}

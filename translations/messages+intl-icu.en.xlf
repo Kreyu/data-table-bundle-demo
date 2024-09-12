@@ -189,6 +189,14 @@
                 <source>action.close</source>
                 <target>Close</target>
             </trans-unit>
+            <trans-unit id="action.read_more">
+                <source>action.read_more</source>
+                <target>Read more</target>
+            </trans-unit>
+            <trans-unit id="action.read_less">
+                <source>action.read_less</source>
+                <target>Read less</target>
+            </trans-unit>
 
             <trans-unit id="label.title">
                 <source>label.title</source>

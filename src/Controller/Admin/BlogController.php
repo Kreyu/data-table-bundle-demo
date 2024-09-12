@@ -11,12 +11,14 @@
 
 namespace App\Controller\Admin;
 
+use App\DataTable\Type\PostDataTableType;
 use App\Entity\Post;
 use App\Entity\User;
 use App\Form\PostType;
 use App\Repository\PostRepository;
 use App\Security\PostVoter;
 use Doctrine\ORM\EntityManagerInterface;
+use Kreyu\Bundle\DataTableBundle\DataTableFactoryAwareTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\SubmitButton;
@@ -43,25 +45,33 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 final class BlogController extends AbstractController
 {
     /**
-     * Lists all Post entities.
-     *
-     * This controller responds to two different routes with the same URL:
-     *   * 'admin_post_index' is the route with a name that follows the same
-     *     structure as the rest of the controllers of this class.
-     *   * 'admin_index' is a nice shortcut to the backend homepage. This allows
-     *     to create simpler links in the templates. Moreover, in the future we
-     *     could move this annotation to any other controller while maintaining
-     *     the route name and therefore, without breaking any existing link.
+     * Adds data table related methods to the controller:
+     *   * 'createDataTable' to create data table of specific type
+     *   * 'createNamedDataTable' similar to 'createDataTable' but allows
+     *     to manually set the name of the data table
+     *   * 'createDataTableBuilder' to create an instance of data table builder
+     *     which can be used to manually build the data table
+     *   * 'createNamedDataTableBuilder' similar to 'createDataTableBuilder'
+     *     but allows to manually set the name of the data table
      */
-    #[Route('/', name: 'admin_index', methods: ['GET'])]
+    use DataTableFactoryAwareTrait;
+
+    /**
+     * Lists all Post entities.
+     */
     #[Route('/', name: 'admin_post_index', methods: ['GET'])]
     public function index(
+        Request $request,
         #[CurrentUser] User $user,
         PostRepository $posts,
     ): Response {
-        $authorPosts = $posts->findBy(['author' => $user], ['publishedAt' => 'DESC']);
+        $authorPosts = $this->createDataTable(PostDataTableType::class, $posts->createByAuthorQueryBuilder($user));
+        $authorPosts->handleRequest($request);
 
-        return $this->render('admin/blog/index.html.twig', ['posts' => $authorPosts]);
+        return $this->render('admin/blog/index.html.twig', [
+            // Important: call the 'createView' method and pass the DataTableView to Twig
+            'posts' => $authorPosts->createView(),
+        ]);
     }
 
     /**
@@ -159,15 +169,8 @@ final class BlogController extends AbstractController
      */
     #[Route('/{id:post}/delete', name: 'admin_post_delete', requirements: ['id' => Requirement::POSITIVE_INT], methods: ['POST'])]
     #[IsGranted('delete', subject: 'post')]
-    public function delete(Request $request, Post $post, EntityManagerInterface $entityManager): Response
+    public function delete(Post $post, EntityManagerInterface $entityManager): Response
     {
-        /** @var string|null $token */
-        $token = $request->getPayload()->get('token');
-
-        if (!$this->isCsrfTokenValid('delete', $token)) {
-            return $this->redirectToRoute('admin_post_index', [], Response::HTTP_SEE_OTHER);
-        }
-
         // Delete the tags associated with this blog post. This is done automatically
         // by Doctrine, except for SQLite (the database used in this application)
         // because foreign key support is not enabled by default in SQLite

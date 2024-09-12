@@ -113,4 +113,13 @@ return [
     '@symfony/ux-live-component' => [
         'path' => './vendor/symfony/ux-live-component/assets/dist/live_controller.js',
     ],
+    'sortablejs' => [
+        'version' => '1.15.3',
+    ],
+    '@stimulus-components/read-more' => [
+        'version' => '5.0.0',
+    ],
+    'stimulus-use' => [
+        'version' => '0.52.2',
+    ],
 ];
