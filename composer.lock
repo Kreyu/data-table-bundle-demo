@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0c935a5061b02cf3954632581c6281e1",
+    "content-hash": "f70f757762bf4844794e75071a1ba68d",
     "packages": [
         {
             "name": "composer/semver",
@@ -1449,17 +1449,11 @@
         },
         {
             "name": "kreyu/data-table-bundle",
-            "version": "v0.21.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Kreyu/data-table-bundle.git",
-                "reference": "ac7809e30db774cac9cd8ed88116f0c86aa308d7"
-            },
+            "version": "dev-main",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Kreyu/data-table-bundle/zipball/ac7809e30db774cac9cd8ed88116f0c86aa308d7",
-                "reference": "ac7809e30db774cac9cd8ed88116f0c86aa308d7",
-                "shasum": ""
+                "type": "path",
+                "url": "lib/kreyu/data-table-bundle",
+                "reference": "ac7809e30db774cac9cd8ed88116f0c86aa308d7"
             },
             "require": {
                 "php": "^8.1",
@@ -1493,7 +1487,11 @@
                     "Kreyu\\Bundle\\DataTableBundle\\": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Kreyu\\Bundle\\DataTableBundle\\Tests\\": "tests"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -1507,11 +1505,9 @@
             "keywords": [
                 "symfony-ux"
             ],
-            "support": {
-                "issues": "https://github.com/Kreyu/data-table-bundle/issues",
-                "source": "https://github.com/Kreyu/data-table-bundle/tree/v0.21.4"
-            },
-            "time": "2024-09-12T07:46:30+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "league/commonmark",
@@ -9280,7 +9276,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "kreyu/data-table-bundle": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

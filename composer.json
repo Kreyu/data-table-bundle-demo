@@ -20,7 +20,7 @@
         "doctrine/doctrine-bundle": "^2.11",
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^3.0",
-        "kreyu/data-table-bundle": "0.21.*",
+        "kreyu/data-table-bundle": "@dev",
         "league/commonmark": "^2.1",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "7.1.*",
@@ -110,5 +110,11 @@
             "allow-contrib": true,
             "require": "7.1.*"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "lib/kreyu/data-table-bundle/"
+        }
+    ]
 }
